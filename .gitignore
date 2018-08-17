@@ -4,4 +4,5 @@ __pycache__
 venv
 /static
 .DS_Store
+.idea
 organization/db.sqlite3
