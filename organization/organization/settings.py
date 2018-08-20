@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django Packages
     'email_dispatch',
+    'rest_framework',
+    'rest_api',
 ]
 
 MIDDLEWARE = [
