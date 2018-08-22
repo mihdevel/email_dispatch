@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from datetime import date
 from .models import Email
 import hashlib
-import smtplib
+from django.core.mail import send_mail
 
 
 
@@ -26,9 +26,18 @@ def unsubscribe_send(request):
   
   text_email = 'Для того, чтобы отписаться от рассылки перейдите по ссылке\n' \
        '<a href"{}">{}</a>'.format(url_unsubscribe, url_unsubscribe)
+
+  # Отправка письма
+  status_send_mail = send_mail(
+    'Subject here',
+    text_email,
+    'from@example.com',
+    [email],
+    fail_silently=True,
+  )
   
-  # С отправкой письма на email я еще не разобрался,
-  # но она должна осуществляться здесь!
+  if not status_send_mail:
+    return HttpResponse('Ой, произошла ошибочка, попробуйте еще раз!')
 
   text_return = '{}, мы отправили на вашу эл. почту письмо для подтверждения отписки от рассылки! ' \
                 'Пожалуйста, проверьте её!'
